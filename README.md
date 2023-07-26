@@ -95,11 +95,12 @@ Output of the above code: After running the above the code will create an employ
 Step 4: Create a table and Import the CSV data into the MySQL table
 We will create an employee_data table under the employee database and insert the records in MySQL with below python code
 in the below line please pass the create table statement which you want #to create
-the connection is not auto committed by default, so we must commit to save our changes
+the connection is not auto committed by default, so we must commit to save our changes:
+
 
    import mysql.connector as msql
    from mysql.connector import Error
-    ry:
+    try:
         conn = mysql.connect(host='localhost', database='employee', user='root', password='root@123')
         if conn.is_connected():
             cursor = conn.cursor()
@@ -118,6 +119,7 @@ the connection is not auto committed by default, so we must commit to save our c
             conn.commit()
 except Error as e:
             print("Error while connecting to MySQL", e)
+
 
 Step 5 : Query the Table
 Query the table to make sure that our inserted data has been saved correctly.

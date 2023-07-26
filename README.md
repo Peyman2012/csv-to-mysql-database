@@ -97,18 +97,19 @@ Output of the above code: After running the above the code will create an employ
 Step 4: Create a table and Import the CSV data into the MySQL table
 We will create an employee_data table under the employee database and insert the records in MySQL with below python code.
 
-import mysql.connector as msql
-from mysql.connector import Error
-try:
-    conn = mysql.connect(host='localhost', database='employee', user='root', password='root@123')
-    if conn.is_connected():
-        cursor = conn.cursor()
-        cursor.execute("select database();")
-        record = cursor.fetchone()
-        print("You're connected to database: ", record)
-        cursor.execute('DROP TABLE IF EXISTS employee_data;')
-        print('Creating table....')
-# in the below line please pass the create table statement which you want #to create
+   import mysql.connector as msql
+    from mysql.connector import Error
+    try:
+        conn = mysql.connect(host='localhost', database='employee', user='root', password='root@123')
+        if conn.is_connected():
+            cursor = conn.cursor()
+            cursor.execute("select database();")
+            record = cursor.fetchone()
+            print("You're connected to database: ", record)
+            cursor.execute('DROP TABLE IF EXISTS employee_data;')
+            print('Creating table....')
+in the below line please pass the create table statement which you want #to create
+the connection is not auto committed by default, so we must commit to save our changes
         cursor.execute("CREATE TABLE employee_data(first_name varchar(255),last_name varchar(255),company_name varchar(255),address varchar(255),city varchar(255),county varchar(255),state varchar(255),zip int,phone1 varchar(255),phone2 varchar(255),email varchar(255),web varchar(255))")
         print("Table is created....")
         #loop through the data frame
@@ -117,7 +118,6 @@ try:
             sql = "INSERT INTO employee.employee_data VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
             cursor.execute(sql, tuple(row))
             print("Record inserted")
-            # the connection is not auto committed by default, so we must commit to save our changes
             conn.commit()
 except Error as e:
             print("Error while connecting to MySQL", e)
@@ -126,13 +126,13 @@ Step 5 : Query the Table
 Query the table to make sure that our inserted data has been saved correctly.
 
 
-# Execute query
-sql = "SELECT * FROM employee.employee_data"
-cursor.execute(sql)
-# Fetch all the records
-result = cursor.fetchall()
-for i in result:
-    print(i)
+Execute query
+    sql = "SELECT * FROM employee.employee_data"
+    cursor.execute(sql)
+Fetch all the records
+    result = cursor.fetchall()
+    for i in result:
+        print(i)
 
 Tips for this code:
 

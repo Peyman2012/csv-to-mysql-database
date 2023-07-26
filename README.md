@@ -112,7 +112,6 @@ in the below line please pass the create table statement which you want #to crea
 the connection is not auto committed by default, so we must commit to save our changes
         cursor.execute("CREATE TABLE employee_data(first_name varchar(255),last_name varchar(255),company_name varchar(255),address varchar(255),city varchar(255),county varchar(255),state varchar(255),zip int,phone1 varchar(255),phone2 varchar(255),email varchar(255),web varchar(255))")
         print("Table is created....")
-        #loop through the data frame
         for i,row in empdata.iterrows():
             #here %S means string values 
             sql = "INSERT INTO employee.employee_data VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"

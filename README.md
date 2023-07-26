@@ -61,7 +61,7 @@ Flexibility: The MySQL Document Store gives users maximum flexibility in develop
 MySQL use cases
 Cloud applications: MySQL is very popular in the cloud. MySQL HeatWave is a fully managed database service, powered by the integrated HeatWave in-memory query accelerator. It’s the only cloud database service that combines transactions, real-time analytics across data warehouses and data lakes, and machine learning (ML) services into one MySQL Database—without the complexity, latency, cost, and risk of ETL duplication. MySQL HeatWave is 6.5X faster than Amazon Redshift at half the cost, 7X faster than Snowflake at one-fifth the cost, and 1,400X faster than Amazon Aurora at half the cost. With MySQL HeatWave AutoML, developers and data analysts can build, train, deploy, and explain machine learning models within MySQL HeatWave in a fully automated way—25X faster than Amazon Redshift ML at 1% of the cost.
 
-2
+Tips for this code:
 
 The problem is that the dataframe contains NaN values; when passed to the query NaN is not quoted because it's a number, but it gets stringified like this
 
@@ -73,3 +73,10 @@ The problem is that the dataframe contains NaN values; when passed to the query 
 and the database interprets the unquoted "string" as a column name and can't find the column.
 
 The solution is to replace or remove such values before writing to the database, for example by using fillna to replace them with some other, suitable value:
+
+Pandas DataFrame iterrows() Method
+
+The iterrows() method generates an iterator object of the DataFrame, allowing us to iterate each row in the DataFrame.
+
+Each iteration produces an index object and a row object (a Pandas Series object).
+      dataframe.iterrows()

@@ -108,8 +108,10 @@ We will create an employee_data table under the employee database and insert the
             print("You're connected to database: ", record)
             cursor.execute('DROP TABLE IF EXISTS employee_data;')
             print('Creating table....')
+            
 in the below line please pass the create table statement which you want #to create
 the connection is not auto committed by default, so we must commit to save our changes
+
         cursor.execute("CREATE TABLE employee_data(first_name varchar(255),last_name varchar(255),company_name varchar(255),address varchar(255),city varchar(255),county varchar(255),state varchar(255),zip int,phone1 varchar(255),phone2 varchar(255),email varchar(255),web varchar(255))")
         print("Table is created....")
         for i,row in empdata.iterrows():
@@ -125,7 +127,8 @@ Step 5 : Query the Table
 Query the table to make sure that our inserted data has been saved correctly.
 
 
-Execute query
+Execute query:
+
     sql = "SELECT * FROM employee.employee_data"
     cursor.execute(sql)
 Fetch all the records
@@ -142,6 +145,7 @@ The problem is that the dataframe contains NaN values; when passed to the query 
             cursor.execute(sql,tuple(row))
             # print("Record inserted")
             con.commit()
+            
 and the database interprets the unquoted "string" as a column name and can't find the column.
 
 The solution is to replace or remove such values before writing to the database, for example by using fillna to replace them with some other, suitable value:

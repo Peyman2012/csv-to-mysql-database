@@ -92,11 +92,11 @@ Note :if you don't connect then, please install the mysql-connector-python packa
         pip install mysql-connector-python
 
 Output of the above code: After running the above the code will create an employee database in mysql as shown in below.
+
 Step 4: Create a table and Import the CSV data into the MySQL table
 We will create an employee_data table under the employee database and insert the records in MySQL with below python code
 in the below line please pass the create table statement which you want #to create
 the connection is not auto committed by default, so we must commit to save our changes:
-
 
    import mysql.connector as msql
    from mysql.connector import Error
@@ -117,8 +117,8 @@ the connection is not auto committed by default, so we must commit to save our c
             cursor.execute(sql, tuple(row))
             print("Record inserted")
             conn.commit()
-except Error as e:
-            print("Error while connecting to MySQL", e)
+    except Error as e:
+                print("Error while connecting to MySQL", e)
 
 
 Step 5 : Query the Table

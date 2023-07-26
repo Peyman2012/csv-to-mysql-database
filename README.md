@@ -95,6 +95,7 @@ Output of the above code: After running the above the code will create an employ
 
 Step 4: Create a table and Import the CSV data into the MySQL table
 We will create an employee_data table under the employee database and insert the records in MySQL with below python code.
+
 import mysql.connector as msql
 from mysql.connector import Error
     try:

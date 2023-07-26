@@ -79,8 +79,7 @@ Create a connection object to connect to MySQL, The connect() constructor create
 import mysql.connector as msql
 from mysql.connector import Error
 try:
-    conn = msql.connect(host='localhost', user='root',  
-                        password='root@123')#give ur username, password
+    conn = msql.connect(host='localhost', user='root', password='')
     if conn.is_connected():
         cursor = conn.cursor()
         cursor.execute("CREATE DATABASE employee")

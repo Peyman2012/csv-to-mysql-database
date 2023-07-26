@@ -107,6 +107,7 @@ We will create an employee_data table under the employee database and insert the
             print("You're connected to database: ", record)
             cursor.execute('DROP TABLE IF EXISTS employee_data;')
             print('Creating table....')
+            
        
             
 in the below line please pass the create table statement which you want #to create

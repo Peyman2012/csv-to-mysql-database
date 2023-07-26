@@ -79,4 +79,5 @@ Pandas DataFrame iterrows() Method
 The iterrows() method generates an iterator object of the DataFrame, allowing us to iterate each row in the DataFrame.
 
 Each iteration produces an index object and a row object (a Pandas Series object).
+
       dataframe.iterrows()

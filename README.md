@@ -61,6 +61,79 @@ Flexibility: The MySQL Document Store gives users maximum flexibility in develop
 MySQL use cases
 Cloud applications: MySQL is very popular in the cloud. MySQL HeatWave is a fully managed database service, powered by the integrated HeatWave in-memory query accelerator. It’s the only cloud database service that combines transactions, real-time analytics across data warehouses and data lakes, and machine learning (ML) services into one MySQL Database—without the complexity, latency, cost, and risk of ETL duplication. MySQL HeatWave is 6.5X faster than Amazon Redshift at half the cost, 7X faster than Snowflake at one-fifth the cost, and 1,400X faster than Amazon Aurora at half the cost. With MySQL HeatWave AutoML, developers and data analysts can build, train, deploy, and explain machine learning models within MySQL HeatWave in a fully automated way—25X faster than Amazon Redshift ML at 1% of the cost.
 
+Step 1: Prepare the CSV File
+To begin, prepare the CSV file that you'd like to import to MySQL. For example, I prepared a simple CSV file with the following data:
+
+Step 2: Import the CSV File into the DataFrame.
+Next, import the CSV file into Python using the pandas library. Here is the code that I used to import the CSV file, and then create the DataFrame. You'll need to change the path name to reflect the location where the CSV file is stored on your computer
+
+
+import pandas as pd
+empdata = pd.read_csv('C:\\Users\\XXXXX\\empdata.csv', index_col=False, delimiter = ',')
+empdata.head()
+
+Step 3 : Connect to the MySQL using Python and create a Database
+Create a connection object to connect to MySQL, The connect() constructor creates a connection to the MySQL and returns a MySQLConnection object.
+
+
+import mysql.connector as msql
+from mysql.connector import Error
+try:
+    conn = msql.connect(host='localhost', user='root',  
+                        password='root@123')#give ur username, password
+    if conn.is_connected():
+        cursor = conn.cursor()
+        cursor.execute("CREATE DATABASE employee")
+        print("Database is created")
+except Error as e:
+    print("Error while connecting to MySQL", e)
+
+Note :if you don't connect then, please install the mysql-connector-python package, type the following command:
+
+        pip install mysql-connector-python
+
+Output of the above code: After running the above the code will create an employee database in mysql as shown in below.
+
+Step 4: Create a table and Import the CSV data into the MySQL table
+We will create an employee_data table under the employee database and insert the records in MySQL with below python code.
+
+import mysql.connector as msql
+from mysql.connector import Error
+try:
+    conn = mysql.connect(host='localhost', database='employee', user='root', password='root@123')
+    if conn.is_connected():
+        cursor = conn.cursor()
+        cursor.execute("select database();")
+        record = cursor.fetchone()
+        print("You're connected to database: ", record)
+        cursor.execute('DROP TABLE IF EXISTS employee_data;')
+        print('Creating table....')
+# in the below line please pass the create table statement which you want #to create
+        cursor.execute("CREATE TABLE employee_data(first_name varchar(255),last_name varchar(255),company_name varchar(255),address varchar(255),city varchar(255),county varchar(255),state varchar(255),zip int,phone1 varchar(255),phone2 varchar(255),email varchar(255),web varchar(255))")
+        print("Table is created....")
+        #loop through the data frame
+        for i,row in empdata.iterrows():
+            #here %S means string values 
+            sql = "INSERT INTO employee.employee_data VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+            cursor.execute(sql, tuple(row))
+            print("Record inserted")
+            # the connection is not auto committed by default, so we must commit to save our changes
+            conn.commit()
+except Error as e:
+            print("Error while connecting to MySQL", e)
+
+Step 5 : Query the Table
+Query the table to make sure that our inserted data has been saved correctly.
+
+
+# Execute query
+sql = "SELECT * FROM employee.employee_data"
+cursor.execute(sql)
+# Fetch all the records
+result = cursor.fetchall()
+for i in result:
+    print(i)
+
 Tips for this code:
 
 The problem is that the dataframe contains NaN values; when passed to the query NaN is not quoted because it's a number, but it gets stringified like this

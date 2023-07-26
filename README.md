@@ -101,7 +101,7 @@ the connection is not auto committed by default, so we must commit to save our c
 import mysql.connector as msql
 from mysql.connector import Error
 try:
-    conn = mysql.connect(host='localhost', database='employee', user='root', password='root@123')
+    conn = mysql.connect(host='localhost', database='employee', user='root', password='')
     if conn.is_connected():
         cursor = conn.cursor()
         cursor.execute("select database();")

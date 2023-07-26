@@ -109,7 +109,7 @@ try:
         print("You're connected to database: ", record)
         cursor.execute('DROP TABLE IF EXISTS employee_data;')
         print('Creating table....')
-        cursor.execute("CREATE TABLE employee_data(first_name varchar(255),last_name varchar(255),company_name varchar(255),address varchar(255),city varchar(255),county varchar(255),state varchar(255),zip int,phone1 varchar(255),phone2 varchar(255),email varchar(255),web varchar(255))")
+        cursor.execute("CREATE TABLE employee_data(first_name varchar(255),last_name varchar(255),company_name varchar(255),address varchar(255),city                     varchar(255),county varchar(255),state varchar(255),zip int,phone1 varchar(255),phone2 varchar(255),email varchar(255),web varchar(255))")
         print("Table is created....")
         for i,row in empdata.iterrows():
             #here %S means string values 
@@ -119,6 +119,7 @@ try:
             conn.commit()
 except Error as e:
             print("Error while connecting to MySQL", e)
+
 
 
 Step 5 : Query the Table
